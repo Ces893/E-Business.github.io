@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASTROSouvenirs - Souvenirs peruanos personalizados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="/Recursos/62986eec1236217bc9a406a0.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Navbar responsivo actualizado -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo con imagen -->
+                <div class="flex-shrink-0 flex items-center">
+                    <div class="flex items-center">
+                        <a href="index.html" class="flex items-center">
+                            <img src="Recursos/62986eec1236217bc9a406a0.png" alt="Logo ASTROSouvenirs"
+                                class="h-10 w-10 rounded-full mr-3 border-2 border-primary">
+                            <span class="text-primary text-2xl font-bold font-heading">ASTROSouvenirs</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Barra de búsqueda (desktop) -->
+                <div class="search-container hidden md:block">
+                    <div class="search-bar relative">
+                        <i class="material-icons search-icon">search</i>
+                        <input type="text" placeholder="Buscar productos...">
+                    </div>
+                </div>
+
+                <!-- Menú para desktop -->
+                <div class="nav-desktop-items hidden xl:flex items-center space-x-4 2xl:space-x-6">
+                    <a href="index.html" class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                        <i class="material-icons mr-2">home</i>
+                        Inicio
+                    </a>
+                    <a href="productos.html"
+                        class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                        <i class="material-icons mr-2">shopping_bag</i>
+                        Productos
+                    </a>
+                    <div class="relative">
+                        <button id="categories-button"
+                            class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                            <i class="material-icons mr-2">category</i>
+                            Categorías
+                        </button>
+                        <!-- Popup de categorías -->
+                        <div id="categories-popup"
+                            class="categories-popup hidden absolute left-0 mt-1 w-64 bg-white rounded-lg shadow-lg z-50 border border-gray-200">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold mb-3 text-center text-primary">Categorías</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Niños</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Parejas</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Viajeros</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Recuerdos</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Nacionales</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Grupal</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                        <i class="material-icons mr-2">info</i>
+                        Nosotros
+                    </a>
+                    <a href="contact.html" class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                        <i class="material-icons mr-2">email</i>
+                        Contacto
+                    </a>
+                    <div class="flex items-center space-x-6">
+                        <a href="carrito.html" class="nav-link text-dark hover:text-primary flex items-center">
+                            <i class="material-icons mr-1">shopping_cart</i>
+                            <span>(2)</span>
+                        </a>
+                        <div class="user-icon relative">
+                            <button id="user-button" class="text-dark hover:text-primary flex items-center">
+                                <i class="material-icons">account_circle</i>
+                            </button>
+                            <!-- Popup de login -->
+                            <div id="login-popup" class="login-popup">
+                                <h3 class="text-lg font-bold mb-4 text-center">Iniciar Sesión</h3>
+                                <form class="login-form">
+                                    <input type="email" placeholder="Correo electrónico" required>
+                                    <input type="password" placeholder="Contraseña" required>
+                                    <button type="submit">Ingresar</button>
+                                </form>
+                                <div class="login-options">
+                                    <a href="#" class="block mb-2">¿Olvidaste tu contraseña?</a>
+                                    <a href="#" class="block">Crear una cuenta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón móvil -->
+                <div class="nav-mobile-button flex items-center space-x-4">
+                    <button id="search-button" class="text-dark hover:text-primary md:hidden">
+                        <i class="material-icons">search</i>
+                    </button>
+                    <button id="mobile-menu-button" class="text-dark hover:text-primary">
+                        <i class="material-icons text-3xl">menu</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú móvil -->
+        <div id="mobile-menu" class="md:hidden hidden bg-light-gray pb-3 px-4">
+
+            <div id="mobile-categories-popup" class="hidden mt-3 bg-white p-4 rounded-lg shadow-md">
+                <h3 class="text-lg font-bold mb-3 text-center text-primary">Categorías</h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Niños</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Parejas</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Viajeros</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Recuerdos</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Nacionales</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Grupal</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="search-bar my-3">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" placeholder="Buscar productos...">
+            </div>
+
+            <a href="index.html" class="block py-2 text-dark hover:text-primary flex items-center">
+                <i class="material-icons mr-2">home</i>
+                Inicio
+            </a>
+            <a href="productos.html" class="block py-2 text-dark hover:text-primary flex items-center">
+                <i class="material-icons mr-2">shopping_bag</i>
+                Productos
+            </a>
+            <button id="mobile-categories-button"
+                class="block py-2 text-dark hover:text-primary flex items-center w-full">
+                <i class="material-icons mr-2">category</i>
+                Categorías
+            </button>
+            <a href="about.html" class="block py-2 text-dark hover:text-primary flex items-center">
+                <i class="material-icons mr-2">info</i>
+                Nosotros
+            </a>
+            <a href="contact.html" class="block py-2 text-dark hover:text-primary flex items-center">
+                <i class="material-icons mr-2">email</i>
+                Contacto
+            </a>
+            <div class="flex space-x-4 pt-2">
+                <a href="carrito.html" class="text-dark hover:text-primary flex items-center">
+                    <i class="material-icons mr-1">shopping_cart</i>
+                    <span>(2)</span>
+                </a>
+                <button id="mobile-user-button" class="text-dark hover:text-primary flex items-center">
+                    <i class="material-icons">account_circle</i>
+                </button>
+            </div>
+            <!-- Popup de login para móvil -->
+            <div id="mobile-login-popup" class="hidden mt-3 bg-white p-4 rounded-lg shadow-md">
+                <h3 class="text-lg font-bold mb-4 text-center">Iniciar Sesión</h3>
+                <form class="login-form">
+                    <input type="email" placeholder="Correo electrónico" required>
+                    <input type="password" placeholder="Contraseña" required>
+                    <button type="submit">Ingresar</button>
+                </form>
+                <div class="login-options">
+                    <a href="#" class="block mb-2">¿Olvidaste tu contraseña?</a>
+                    <a href="#" class="block">Crear una cuenta</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-dark text-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">Nuestros Productos</h1>
+            <p class="text-lg">Souvenirs personalizados con identidad cultural peruana</p>
+        </div>
+    </section>
+
+    <!-- Filtros y Productos -->
+    <section class="py-12 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Filtros -->
+                <div class="lg:col-span-1">
+                    <div class="bg-light p-6 rounded-lg shadow-sm sticky top-4">
+                        <h2 class="text-xl font-bold mb-4">Filtrar Productos</h2>
+
+                        <!-- Filtro por Categoría -->
+                        <div class="mb-6">
+                            <h3 class="font-medium mb-3">Categorías</h3>
+                            <div class="space-y-2">
+                                <button
+                                    class="filter-option active w-full text-left px-3 py-2 border border-light-gray rounded">
+                                    Todos los productos
+                                </button>
+                                <button
+                                    class="filter-option w-full text-left px-3 py-2 border border-light-gray rounded">
+                                    Llaveros
+                                </button>
+                                <button
+                                    class="filter-option w-full text-left px-3 py-2 border border-light-gray rounded">
+                                    Tazas
+                                </button>
+                                <button
+                                    class="filter-option w-full text-left px-3 py-2 border border-light-gray rounded">
+                                    Camisetas
+                                </button>
+                                <button
+                                    class="filter-option w-full text-left px-3 py-2 border border-light-gray rounded">
+                                    Imanes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Filtro por Género -->
+                        <div class="mb-6">
+                            <h3 class="font-medium mb-3">Género</h3>
+                            <div class="space-y-2">
+                                <button
+                                    class="filter-option active w-full text-left px-3 py-2 border border-light-gray rounded">
+                                    Todos
+                                </button>
+                                <button
+                                    class="filter-option w-full text-left px-3 py-2 border border-light-gray rounded">
+                                    Niños
+                                </button>
+                                <button
+                                    class="filter-option w-full text-left px-3 py-2 border border-light-gray rounded">
+                                    Mujeres
+                                </button>
+                                <button
+                                    class="filter-option w-full text-left px-3 py-2 border border-light-gray rounded">
+                                    Hombres
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Filtro por Precio -->
+                        <div class="mb-6">
+                            <h3 class="font-medium mb-3">Rango de Precio</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <input type="range" min="10" max="150" value="150"
+                                        class="w-full h-2 bg-light-gray rounded-lg appearance-none cursor-pointer">
+                                    <div class="flex justify-between mt-2">
+                                        <span>S/ 10</span>
+                                        <span>S/ 150</span>
+                                    </div>
+                                </div>
+                                <button
+                                    class="w-full bg-primary hover:bg-opacity-90 text-white py-2 px-4 rounded transition">
+                                    Aplicar Filtros
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Resetear Filtros -->
+                        <button
+                            class="w-full text-primary hover:text-opacity-80 py-2 px-4 border border-primary rounded transition">
+                            Limpiar Filtros
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Lista de Productos -->
+                <div class="lg:col-span-3">
+                    <!-- Ordenar y Mostrar -->
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+                        <p class="mb-2 md:mb-0">Mostrando 10 de 15 productos</p>
+                        <div class="flex items-center">
+                            <label for="sort" class="mr-2">Ordenar por:</label>
+                            <select id="sort"
+                                class="px-3 py-2 border border-light-gray rounded focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                <option>Más relevantes</option>
+                                <option>Menor precio</option>
+                                <option>Mayor precio</option>
+                                <option>Más nuevos</option>
+                                <option>Mejor valorados</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Grid de Productos -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Producto 1 -->
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                            <span class="product-status status-available">Disponible</span>
+                            <img src="Recursos/machullavero.jpg" alt="Llavero Machu Picchu"
+                                class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Llavero Machu Picchu</h3>
+                                    <span class="bg-light-gray text-xs px-2 py-1 rounded">Niños</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Llavero con diseño del Machu Picchu en aleación de
+                                    zinc</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold text-lg">S/ 25.00</span>
+                                    <button
+                                        class="bg-accent hover:bg-opacity-90 text-white p-2 rounded-full transition">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 2 -->
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                            <span class="product-status status-soldout">Agotado</span>
+                            <img src="Recursos/tazaandina.webp" alt="Taza Personalizada"
+                                class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Taza Diseño Andino</h3>
+                                    <span class="bg-light-gray text-xs px-2 py-1 rounded">Mujeres</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Taza de cerámica con diseños andinos
+                                    personalizables</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold text-lg">S/ 35.00</span>
+                                    <button
+                                        class="bg-accent hover:bg-opacity-90 text-white p-2 rounded-full transition">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 3 -->
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                            <span class="product-status status-available">Disponible</span>
+                            <img src="Recursos/ponchoalpaca.jpg" alt="Poncho Alpaca" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Poncho de Alpaca</h3>
+                                    <span class="bg-light-gray text-xs px-2 py-1 rounded">Hombres</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Poncho tejido a mano con lana de alpaca</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold text-lg">S/ 120.00</span>
+                                    <button
+                                        class="bg-accent hover:bg-opacity-90 text-white p-2 rounded-full transition">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 4 -->
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                            <span class="product-status status-lowstock">Últimas unidades</span>
+                            <img src="Recursos/chullo.jpeg" alt="Chullo Tradicional" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Chullo Andino</h3>
+                                    <span class="bg-light-gray text-xs px-2 py-1 rounded">Niños</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Chullo tradicional peruano tejido a mano</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold text-lg">S/ 45.00</span>
+                                    <button
+                                        class="bg-accent hover:bg-opacity-90 text-white p-2 rounded-full transition">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 5 -->
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                            <span class="product-status status-limited">Edición limitada</span>
+                            <img src="Recursos/imanesperu.jpg" alt="Juego de Imanes" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Imanes del Perú</h3>
+                                    <span class="bg-light-gray text-xs px-2 py-1 rounded">Mujeres</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Set de 6 imanes con iconos peruanos</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold text-lg">S/ 30.00</span>
+                                    <button
+                                        class="bg-accent hover:bg-opacity-90 text-white p-2 rounded-full transition">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 6 -->
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                            <span class="product-status status-available">Disponible</span>
+                            <img src="Recursos/mochila.jpg" alt="Bolso Mochila" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Mochila Andina</h3>
+                                    <span class="bg-light-gray text-xs px-2 py-1 rounded">Hombres</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Mochila con diseños tradicionales peruanos</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold text-lg">S/ 75.00</span>
+                                    <button
+                                        class="bg-accent hover:bg-opacity-90 text-white p-2 rounded-full transition">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 7 -->
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                            <span class="product-status status-available">Disponible</span>
+                            <img src="https://rimage.ripley.com.pe/home.ripley/Attachment/MKP/409/PMP00002835075/imagen2-1.jpeg"
+                                alt="Aretes Plata" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Aretes de Plata</h3>
+                                    <span class="bg-light-gray text-xs px-2 py-1 rounded">Mujeres</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Aretes artesanales de plata con motivos peruanos
+                                </p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold text-lg">S/ 65.00</span>
+                                    <button
+                                        class="bg-accent hover:bg-opacity-90 text-white p-2 rounded-full transition">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 8 -->
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                            <span class="product-status status-lowstock">Últimas unidades</span>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnqIKLRsfNcJIIzN2qR0Oo8kj2gKJi0qO4cg&s"
+                                alt="Libreta Artesanal" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Libreta Artesanal</h3>
+                                    <span class="bg-light-gray text-xs px-2 py-1 rounded">Niños</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Libreta con portada de tejidos peruanos</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold text-lg">S/ 28.00</span>
+                                    <button
+                                        class="bg-accent hover:bg-opacity-90 text-white p-2 rounded-full transition">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 9 -->
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                            <span class="product-status status-lowstock">Últimas unidades</span>
+                            <img src="https://img.freepik.com/fotos-premium/taza-andina-pintada-mano-ilustracion-machu-picchu-artesania-peruana-cusquena_191371-784.jpg"
+                                alt="Taza Personalizada" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Taza Cusqueña</h3>
+                                    <span class="bg-light-gray text-xs px-2 py-1 rounded">Hombres</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Taza con diseño del Señor de los Temblores</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold text-lg">S/ 32.00</span>
+                                    <button
+                                        class="bg-accent hover:bg-opacity-90 text-white p-2 rounded-full transition">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 10 -->
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                            <span class="product-status status-limited">Edición limitada</span>
+                            <img src="https://i.etsystatic.com/19659626/r/il/9d99e9/4708243887/il_fullxfull.4708243887_9kt9.jpg"
+                                alt="Llavero Nazca" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Llavero Líneas de Nazca</h3>
+                                    <span class="bg-light-gray text-xs px-2 py-1 rounded">Mujeres</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Llavero con diseño del colibrí de Nazca</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold text-lg">S/ 22.00</span>
+                                    <button
+                                        class="bg-accent hover:bg-opacity-90 text-white p-2 rounded-full transition">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 11 -->
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                            <span class="product-status status-available">Disponible</span>
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREHOTkiJXgPSppscIUk3r1kP_xN2crGBJmkw&s"
+                                alt="Llavero de Huayruro" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Llavero de Huayruro</h3>
+                                    <span class="bg-light-gray text-xs px-2 py-1 rounded">Mujeres</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Amuleto tradicional hecho con semillas de
+                                    huayruro, símbolo de buena suerte y protección en la cultura andina.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold text-lg">S/ 22.00</span>
+                                    <button
+                                        class="bg-accent hover:bg-opacity-90 text-white p-2 rounded-full transition">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Producto 12 -->
+                        <div class="product-card bg-white rounded-lg shadow-md overflow-hidden relative">
+                            <span class="product-status status-available">Disponible</span>
+                            <img src="https://images-cdn.ubuy.co.in/63513507fbcb430952045a66-orgullo-inca-bandera-de-peru-flag.jpg"
+                                alt="Camiseta Orgullo Inca" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <div class="flex justify-between items-start mb-2">
+                                    <h3 class="font-semibold text-lg">Camiseta "Orgullo Inca"</h3>
+                                    <span class="bg-light-gray text-xs px-2 py-1 rounded">Mujeres</span>
+                                </div>
+                                <p class="text-gray-600 text-sm mb-4">Polera de algodón con frases icónicas del Perú y
+                                    motivos inspirados en la iconografía precolombina.</p>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-primary font-bold text-lg">S/ 22.00</span>
+                                    <button
+                                        class="bg-accent hover:bg-opacity-90 text-white p-2 rounded-full transition">
+                                        <i class="material-icons">add_shopping_cart</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Paginación -->
+                    <div class="flex justify-center mt-12 space-x-2">
+                        <a href="#" class="pagination-link">
+                            <i class="material-icons">chevron_left</i>
+                        </a>
+                        <a href="#" class="pagination-link active">1</a>
+                        <a href="#" class="pagination-link">2</a>
+                        <a href="#" class="pagination-link">
+                            <i class="material-icons">chevron_right</i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-12 pb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo y descripción -->
+                <div>
+                    <h3 class="text-primary text-2xl font-bold mb-4 font-heading">ASTROSouvenirs</h3>
+                    <p class="text-gray-300 text-sm">Souvenirs personalizados con identidad cultural peruana y un
+                        enfoque digital moderno.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="https://www.facebook.com/" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://web.whatsapp.com/" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Enlaces rápidos -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 font-heading">Enlaces Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition text-sm">Inicio</a>
+                        </li>
+                        <li><a href="productos.html"
+                                class="text-gray-300 hover:text-white transition text-sm">Productos</a></li>
+                        <li><a href="productos.html"
+                                class="text-gray-300 hover:text-white transition text-sm">Categorías</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white transition text-sm">Nosotros</a>
+                        </li>
+                        <li><a href="contact.html"
+                                class="text-gray-300 hover:text-white transition text-sm">Contacto</a></li>
+                        <li><a href="terminosyconiciones.html"
+                                class="text-gray-300 hover:text-white transition text-sm">T&C</a></li>
+                    </ul>
+                </div>
+
+                <!-- Información de contacto -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 font-heading">Contacto</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="material-icons mr-2 text-primary text-sm">location_on</i>
+                            <span class="text-gray-300 text-sm">Av. Cultura 123, Lima, Perú</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="material-icons mr-2 text-primary text-sm">phone</i>
+                            <span class="text-gray-300 text-sm">+51 987 654 321</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="material-icons mr-2 text-primary text-sm">email</i>
+                            <span class="text-gray-300 text-sm">info@astrosouvenirs.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Boletín informativo -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 font-heading">Newsletter</h4>
+                    <p class="text-gray-300 text-sm mb-4">Suscríbete para recibir ofertas y novedades.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Tu correo"
+                            class="px-4 py-2 rounded-l focus:outline-none text-dark text-sm w-full">
+                        <button class="bg-primary hover:bg-opacity-90 px-4 py-2 rounded-r transition">
+                            <i class="material-icons text-white text-sm">send</i>
+                        </button>
+                    </form>
+                    <p class="text-gray-400 text-xs mt-2">Prometemos no enviar spam.</p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; 2023 ASTROSouvenirs. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        const categoriesButton = document.getElementById('categories-button');
+        const categoriesPopup = document.getElementById('categories-popup');
+        const mobileCategoriesButton = document.getElementById('mobile-categories-button');
+        const mobileCategoriesPopup = document.getElementById('mobile-categories-popup');
+
+        // Para desktop
+        categoriesButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            categoriesPopup.classList.toggle('hidden');
+
+            // Cerrar otros popups si están abiertos
+            document.getElementById('login-popup').classList.add('hidden');
+        });
+
+        // Para móvil
+        mobileCategoriesButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            mobileCategoriesPopup.classList.toggle('hidden');
+
+            // Cerrar otros popups si están abiertos
+            document.getElementById('mobile-login-popup').classList.add('hidden');
+        });
+
+        // Cerrar popups al hacer clic fuera de ellos
+        document.addEventListener('click', function (e) {
+            if (!categoriesButton.contains(e.target) && !categoriesPopup.contains(e.target)) {
+                categoriesPopup.classList.add('hidden');
+            }
+
+            if (!mobileCategoriesButton.contains(e.target) && !mobileCategoriesPopup.contains(e.target)) {
+                mobileCategoriesPopup.classList.add('hidden');
+            }
+        });
+
+        // Control de menú móvil mejorado
+        let resizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (window.innerWidth >= 1280) {
+                    mobileMenu.classList.add('hidden');
+                }
+
+                // Ajustar dinámicamente el navbar
+                adjustNavbarLayout();
+            }, 250);
+        });
+
+        function adjustNavbarLayout() {
+            const navbar = document.querySelector('nav');
+            const viewportWidth = window.innerWidth;
+
+            // Ajustes específicos para el rango problemático
+            if (viewportWidth > 1024 && viewportWidth < 1280) {
+                // Reducir espacio entre items
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.style.fontSize = '0.875rem';
+                    link.style.padding = '0.5rem 0.25rem';
+                });
+
+                // Ajustar barra de búsqueda
+                const searchContainer = document.querySelector('.search-container');
+                if (searchContainer) {
+                    searchContainer.style.maxWidth = '300px';
+                    searchContainer.style.margin = '0 1rem';
+                }
+            }
+        }
+
+        // Inicializar y ajustar al cargar
+        document.addEventListener('DOMContentLoaded', function () {
+            adjustNavbarLayout();
+
+            // Control del menú móvil
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+                document.body.style.overflow = mobileMenu.classList.contains('hidden') ? '' : 'hidden';
+            });
+
+            // Control del botón de búsqueda en móvil
+            const searchButton = document.getElementById('search-button');
+            if (searchButton) {
+                searchButton.addEventListener('click', function () {
+                    document.querySelector('.mobile-search-bar').classList.toggle('hidden');
+                });
+            }
+        });
+        // Activar filtros al hacer clic
+        document.querySelectorAll('.filter-option').forEach(option => {
+            option.addEventListener('click', function () {
+                // Remover active de todos los filtros en el mismo grupo
+                const parent = this.parentElement;
+                parent.querySelectorAll('.filter-option').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // Agregar active al filtro seleccionado
+                this.classList.add('active');
+            });
+        });
+
+        // Cambiar orden al seleccionar
+        document.getElementById('sort').addEventListener('change', function () {
+            console.log('Ordenar por:', this.value);
+            // Aquí iría la lógica para reordenar los productos
+        });
+    </script>
+</body>
+
+</html>

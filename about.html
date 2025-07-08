@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASTROSouvenirs - Souvenirs peruanos personalizados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="/Recursos/62986eec1236217bc9a406a0.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Navbar responsivo actualizado -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo con imagen -->
+                <div class="flex-shrink-0 flex items-center">
+                    <div class="flex items-center">
+                        <a href="index.html" class="flex items-center">
+                            <img src="Recursos/62986eec1236217bc9a406a0.png" alt="Logo ASTROSouvenirs"
+                                class="h-10 w-10 rounded-full mr-3 border-2 border-primary">
+                            <span class="text-primary text-2xl font-bold font-heading">ASTROSouvenirs</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Barra de búsqueda (desktop) -->
+                <div class="search-container hidden md:block">
+                    <div class="search-bar relative">
+                        <i class="material-icons search-icon">search</i>
+                        <input type="text" placeholder="Buscar productos...">
+                    </div>
+                </div>
+
+                <!-- Menú para desktop -->
+                <div class="nav-desktop-items hidden xl:flex items-center space-x-4 2xl:space-x-6">
+                    <a href="index.html" class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                        <i class="material-icons mr-2">home</i>
+                        Inicio
+                    </a>
+                    <a href="productos.html"
+                        class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                        <i class="material-icons mr-2">shopping_bag</i>
+                        Productos
+                    </a>
+                    <div class="relative">
+                        <button id="categories-button"
+                            class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                            <i class="material-icons mr-2">category</i>
+                            Categorías
+                        </button>
+                        <!-- Popup de categorías -->
+                        <div id="categories-popup"
+                            class="categories-popup hidden absolute left-0 mt-1 w-64 bg-white rounded-lg shadow-lg z-50 border border-gray-200">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold mb-3 text-center text-primary">Categorías</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Niños</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Parejas</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Viajeros</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Recuerdos</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Nacionales</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Grupal</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                        <i class="material-icons mr-2">info</i>
+                        Nosotros
+                    </a>
+                    <a href="contact.html" class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                        <i class="material-icons mr-2">email</i>
+                        Contacto
+                    </a>
+                    <div class="flex items-center space-x-6">
+                        <a href="carrito.html" class="nav-link text-dark hover:text-primary flex items-center">
+                            <i class="material-icons mr-1">shopping_cart</i>
+                            <span>(2)</span>
+                        </a>
+                        <div class="user-icon relative">
+                            <button id="user-button" class="text-dark hover:text-primary flex items-center">
+                                <i class="material-icons">account_circle</i>
+                            </button>
+                            <!-- Popup de login -->
+                            <div id="login-popup" class="login-popup">
+                                <h3 class="text-lg font-bold mb-4 text-center">Iniciar Sesión</h3>
+                                <form class="login-form">
+                                    <input type="email" placeholder="Correo electrónico" required>
+                                    <input type="password" placeholder="Contraseña" required>
+                                    <button type="submit">Ingresar</button>
+                                </form>
+                                <div class="login-options">
+                                    <a href="#" class="block mb-2">¿Olvidaste tu contraseña?</a>
+                                    <a href="#" class="block">Crear una cuenta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón móvil -->
+                <div class="nav-mobile-button flex items-center space-x-4">
+                    <button id="search-button" class="text-dark hover:text-primary md:hidden">
+                        <i class="material-icons">search</i>
+                    </button>
+                    <button id="mobile-menu-button" class="text-dark hover:text-primary">
+                        <i class="material-icons text-3xl">menu</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú móvil -->
+        <div id="mobile-menu" class="md:hidden hidden bg-light-gray pb-3 px-4">
+
+            <div id="mobile-categories-popup" class="hidden mt-3 bg-white p-4 rounded-lg shadow-md">
+                <h3 class="text-lg font-bold mb-3 text-center text-primary">Categorías</h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Niños</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Parejas</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Viajeros</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Recuerdos</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Nacionales</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Grupal</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="search-bar my-3">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" placeholder="Buscar productos...">
+            </div>
+
+            <a href="index.html" class="block py-2 text-dark hover:text-primary flex items-center">
+                <i class="material-icons mr-2">home</i>
+                Inicio
+            </a>
+            <a href="productos.html" class="block py-2 text-dark hover:text-primary flex items-center">
+                <i class="material-icons mr-2">shopping_bag</i>
+                Productos
+            </a>
+            <button id="mobile-categories-button"
+                class="block py-2 text-dark hover:text-primary flex items-center w-full">
+                <i class="material-icons mr-2">category</i>
+                Categorías
+            </button>
+            <a href="about.html" class="block py-2 text-dark hover:text-primary flex items-center">
+                <i class="material-icons mr-2">info</i>
+                Nosotros
+            </a>
+            <a href="contact.html" class="block py-2 text-dark hover:text-primary flex items-center">
+                <i class="material-icons mr-2">email</i>
+                Contacto
+            </a>
+            <div class="flex space-x-4 pt-2">
+                <a href="carrito.html" class="text-dark hover:text-primary flex items-center">
+                    <i class="material-icons mr-1">shopping_cart</i>
+                    <span>(2)</span>
+                </a>
+                <button id="mobile-user-button" class="text-dark hover:text-primary flex items-center">
+                    <i class="material-icons">account_circle</i>
+                </button>
+            </div>
+            <!-- Popup de login para móvil -->
+            <div id="mobile-login-popup" class="hidden mt-3 bg-white p-4 rounded-lg shadow-md">
+                <h3 class="text-lg font-bold mb-4 text-center">Iniciar Sesión</h3>
+                <form class="login-form">
+                    <input type="email" placeholder="Correo electrónico" required>
+                    <input type="password" placeholder="Contraseña" required>
+                    <button type="submit">Ingresar</button>
+                </form>
+                <div class="login-options">
+                    <a href="#" class="block mb-2">¿Olvidaste tu contraseña?</a>
+                    <a href="#" class="block">Crear una cuenta</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-dark text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Sobre ASTROSouvenirs</h1>
+            <p class="text-xl max-w-3xl mx-auto">Conectando la rica cultura peruana con recuerdos personalizados que
+                perduran</p>
+        </div>
+    </section>
+
+    <!-- Resumen Ejecutivo -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-12 text-center section-title">Resumen Ejecutivo</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="text-lg mb-6">ASTROSouvenirs es una tienda virtual especializada en la comercialización de
+                        souvenirs personalizados con identidad cultural peruana, dirigida a turistas nacionales e
+                        internacionales que visitan destinos como Lima, Cusco, Arequipa y otras regiones con alta
+                        afluencia turística.</p>
+                    <p class="mb-6">Nuestros productos - llaveros, tazas, camisetas, imanes y postales - son
+                        personalizables con nombres, fechas, frases icónicas, mapas o símbolos representativos del Perú,
+                        utilizando técnicas como sublimación, impresión, bordado y grabado láser.</p>
+                    <p>Combinamos el valor emocional del recuerdo con la estética artesanal y la eficiencia tecnológica,
+                        ofreciendo una propuesta viable, escalable y alineada con las tendencias actuales del mercado
+                        turístico y del e-commerce en Perú.</p>
+                </div>
+                <div class="rounded-lg overflow-hidden shadow-lg">
+                    <img src="https://png.pngtree.com/background/20250129/original/pngtree-souvenir-market-with-handmade-items-in-peru-souvenir-sale-store-photo-picture-image_12572438.jpg"
+                        alt="Artesanía peruana" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Perfil Comercial -->
+    <section class="py-16 bg-light-gray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-12 text-center section-title">Perfil Comercial</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                <!-- Misión -->
+                <div class="mission-vision-card bg-white p-8 rounded-lg shadow-md">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4">Misión</h3>
+                    <p class="text-gray-600">Ofrecer souvenirs personalizados de alta calidad que permitan a los
+                        clientes llevar consigo una parte de su historia y de la cultura peruana, creando una conexión
+                        significativa entre el cliente y el objeto que adquiere.</p>
+                </div>
+
+                <!-- Visión -->
+                <div class="mission-vision-card bg-white p-8 rounded-lg shadow-md">
+                    <div class="text-primary text-4xl mb-4">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4">Visión</h3>
+                    <p class="text-gray-600">Consolidarnos como la tienda virtual líder en el rubro de souvenirs
+                        personalizados en el Perú, destacando por nuestra propuesta creativa, respeto por la identidad
+                        cultural, excelencia en el servicio al cliente y proyección global.</p>
+                </div>
+            </div>
+
+            <!-- Valores -->
+            <div class="bg-white p-8 rounded-lg shadow-md">
+                <h3 class="font-bold text-xl mb-6 text-center">Nuestros Valores</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="text-primary text-3xl mb-3">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Creatividad</h4>
+                        <p class="text-gray-600 text-sm">Transformar ideas en objetos significativos</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-primary text-3xl mb-3">
+                            <i class="fas fa-landmark"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Identidad</h4>
+                        <p class="text-gray-600 text-sm">Reflejo de elementos culturales auténticos</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-primary text-3xl mb-3">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Empatía</h4>
+                        <p class="text-gray-600 text-sm">Interpretar deseos y necesidades del cliente</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-primary text-3xl mb-3">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4 class="font-semibold mb-2">Calidad</h4>
+                        <p class="text-gray-600 text-sm">Excelencia en cada detalle del proceso</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos y Servicios -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold mb-12 text-center section-title">Productos y Servicios</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-12">
+                <div class="text-center">
+                    <div class="product-icon mx-auto">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Llaveros</h3>
+                    <p class="text-gray-600 text-sm">Personalizados con nombres, coordenadas o símbolos típicos</p>
+                </div>
+                <div class="text-center">
+                    <div class="product-icon mx-auto">
+                        <i class="fas fa-mug-hot"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Tazas</h3>
+                    <p class="text-gray-600 text-sm">Diseños alusivos a destinos turísticos y frases icónicas</p>
+                </div>
+                <div class="text-center">
+                    <div class="product-icon mx-auto">
+                        <i class="fas fa-tshirt"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Camisetas</h3>
+                    <p class="text-gray-600 text-sm">Estampados de frases inspiradoras e íconos culturales</p>
+                </div>
+                <div class="text-center">
+                    <div class="product-icon mx-auto">
+                        <i class="fas fa-magnet"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Imanes</h3>
+                    <p class="text-gray-600 text-sm">Representaciones de monumentos y paisajes peruanos</p>
+                </div>
+                <div class="text-center">
+                    <div class="product-icon mx-auto">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3 class="font-semibold mb-2">Postales</h3>
+                    <p class="text-gray-600 text-sm">Personalizadas con fotos o ilustraciones exclusivas</p>
+                </div>
+            </div>
+
+            <div class="bg-dark bg-opacity-10 p-8 rounded-lg">
+                <h3 class="font-bold text-xl mb-4 text-center text-gray-300">Técnicas de Personalización</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <h4 class="font-semibold mb-2 text-primary">Sublimación</h4>
+                        <p class="text-gray-300 text-sm">Para tazas, camisetas y textiles</p>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="font-semibold mb-2 text-primary">Grabado Láser</h4>
+                        <p class="text-gray-300 text-sm">En llaveros y artículos de madera</p>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="font-semibold mb-2 text-primary">Impresión Digital</h4>
+                        <p class="text-gray-300 text-sm">Para postales y empaques</p>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="font-semibold mb-2 text-primary">Bordado</h4>
+                        <p class="text-gray-300 text-sm">En textiles de mayor detalle</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-12 pb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo y descripción -->
+                <div>
+                    <h3 class="text-primary text-2xl font-bold mb-4 font-heading">ASTROSouvenirs</h3>
+                    <p class="text-gray-300 text-sm">Souvenirs personalizados con identidad cultural peruana y un
+                        enfoque digital moderno.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="https://www.facebook.com/" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://web.whatsapp.com/" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Enlaces rápidos -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 font-heading">Enlaces Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition text-sm">Inicio</a>
+                        </li>
+                        <li><a href="productos.html"
+                                class="text-gray-300 hover:text-white transition text-sm">Productos</a></li>
+                        <li><a href="productos.html"
+                                class="text-gray-300 hover:text-white transition text-sm">Categorías</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white transition text-sm">Nosotros</a>
+                        </li>
+                        <li><a href="contact.html"
+                                class="text-gray-300 hover:text-white transition text-sm">Contacto</a></li>
+                        <li><a href="terminosyconiciones.html"
+                                class="text-gray-300 hover:text-white transition text-sm">T&C</a></li>
+                    </ul>
+                </div>
+
+                <!-- Información de contacto -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 font-heading">Contacto</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="material-icons mr-2 text-primary text-sm">location_on</i>
+                            <span class="text-gray-300 text-sm">Av. Cultura 123, Lima, Perú</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="material-icons mr-2 text-primary text-sm">phone</i>
+                            <span class="text-gray-300 text-sm">+51 987 654 321</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="material-icons mr-2 text-primary text-sm">email</i>
+                            <span class="text-gray-300 text-sm">info@astrosouvenirs.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Boletín informativo -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 font-heading">Newsletter</h4>
+                    <p class="text-gray-300 text-sm mb-4">Suscríbete para recibir ofertas y novedades.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Tu correo"
+                            class="px-4 py-2 rounded-l focus:outline-none text-dark text-sm w-full">
+                        <button class="bg-primary hover:bg-opacity-90 px-4 py-2 rounded-r transition">
+                            <i class="material-icons text-white text-sm">send</i>
+                        </button>
+                    </form>
+                    <p class="text-gray-400 text-xs mt-2">Prometemos no enviar spam.</p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; 2023 ASTROSouvenirs. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        const categoriesButton = document.getElementById('categories-button');
+        const categoriesPopup = document.getElementById('categories-popup');
+        const mobileCategoriesButton = document.getElementById('mobile-categories-button');
+        const mobileCategoriesPopup = document.getElementById('mobile-categories-popup');
+
+        // Para desktop
+        categoriesButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            categoriesPopup.classList.toggle('hidden');
+
+            // Cerrar otros popups si están abiertos
+            document.getElementById('login-popup').classList.add('hidden');
+        });
+
+        // Para móvil
+        mobileCategoriesButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            mobileCategoriesPopup.classList.toggle('hidden');
+
+            // Cerrar otros popups si están abiertos
+            document.getElementById('mobile-login-popup').classList.add('hidden');
+        });
+
+        // Cerrar popups al hacer clic fuera de ellos
+        document.addEventListener('click', function (e) {
+            if (!categoriesButton.contains(e.target) && !categoriesPopup.contains(e.target)) {
+                categoriesPopup.classList.add('hidden');
+            }
+
+            if (!mobileCategoriesButton.contains(e.target) && !mobileCategoriesPopup.contains(e.target)) {
+                mobileCategoriesPopup.classList.add('hidden');
+            }
+        });
+        // Control de menú móvil mejorado
+        let resizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (window.innerWidth >= 1280) {
+                    mobileMenu.classList.add('hidden');
+                }
+
+                // Ajustar dinámicamente el navbar
+                adjustNavbarLayout();
+            }, 250);
+        });
+
+        function adjustNavbarLayout() {
+            const navbar = document.querySelector('nav');
+            const viewportWidth = window.innerWidth;
+
+            // Ajustes específicos para el rango problemático
+            if (viewportWidth > 1024 && viewportWidth < 1280) {
+                // Reducir espacio entre items
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.style.fontSize = '0.875rem';
+                    link.style.padding = '0.5rem 0.25rem';
+                });
+
+                // Ajustar barra de búsqueda
+                const searchContainer = document.querySelector('.search-container');
+                if (searchContainer) {
+                    searchContainer.style.maxWidth = '300px';
+                    searchContainer.style.margin = '0 1rem';
+                }
+            }
+        }
+
+        // Inicializar y ajustar al cargar
+        document.addEventListener('DOMContentLoaded', function () {
+            adjustNavbarLayout();
+
+            // Control del menú móvil
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+                document.body.style.overflow = mobileMenu.classList.contains('hidden') ? '' : 'hidden';
+            });
+
+            // Control del botón de búsqueda en móvil
+            const searchButton = document.getElementById('search-button');
+            if (searchButton) {
+                searchButton.addEventListener('click', function () {
+                    document.querySelector('.mobile-search-bar').classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

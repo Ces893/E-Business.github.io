@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASTROSouvenirs - Souvenirs peruanos personalizados</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="/Recursos/62986eec1236217bc9a406a0.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Open Sans', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Navbar responsivo actualizado -->
+    <nav class="bg-white shadow-sm sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo con imagen -->
+                <div class="flex-shrink-0 flex items-center">
+                    <div class="flex items-center">
+                        <a href="index.html" class="flex items-center">
+                            <img src="Recursos/62986eec1236217bc9a406a0.png" alt="Logo ASTROSouvenirs"
+                                class="h-10 w-10 rounded-full mr-3 border-2 border-primary">
+                            <span class="text-primary text-2xl font-bold font-heading">ASTROSouvenirs</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Barra de búsqueda (desktop) -->
+                <div class="search-container hidden md:block">
+                    <div class="search-bar relative">
+                        <i class="material-icons search-icon">search</i>
+                        <input type="text" placeholder="Buscar productos...">
+                    </div>
+                </div>
+
+                <!-- Menú para desktop -->
+                <div class="nav-desktop-items hidden xl:flex items-center space-x-4 2xl:space-x-6">
+                    <a href="index.html" class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                        <i class="material-icons mr-2">home</i>
+                        Inicio
+                    </a>
+                    <a href="productos.html"
+                        class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                        <i class="material-icons mr-2">shopping_bag</i>
+                        Productos
+                    </a>
+                    <div class="relative">
+                        <button id="categories-button"
+                            class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                            <i class="material-icons mr-2">category</i>
+                            Categorías
+                        </button>
+                        <!-- Popup de categorías -->
+                        <div id="categories-popup"
+                            class="categories-popup hidden absolute left-0 mt-1 w-64 bg-white rounded-lg shadow-lg z-50 border border-gray-200">
+                            <div class="p-4">
+                                <h3 class="text-lg font-bold mb-3 text-center text-primary">Categorías</h3>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Niños</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Parejas</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Viajeros</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Recuerdos</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Nacionales</span>
+                                    </a>
+                                    <a href="productos.html"
+                                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                                        <span>Grupal</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="about.html" class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                        <i class="material-icons mr-2">info</i>
+                        Nosotros
+                    </a>
+                    <a href="contact.html" class="nav-link text-dark hover:text-primary font-medium flex items-center">
+                        <i class="material-icons mr-2">email</i>
+                        Contacto
+                    </a>
+                    <div class="flex items-center space-x-6">
+                        <a href="carrito.html" class="nav-link text-dark hover:text-primary flex items-center">
+                            <i class="material-icons mr-1">shopping_cart</i>
+                            <span>(2)</span>
+                        </a>
+                        <div class="user-icon relative">
+                            <button id="user-button" class="text-dark hover:text-primary flex items-center">
+                                <i class="material-icons">account_circle</i>
+                            </button>
+                            <!-- Popup de login -->
+                            <div id="login-popup" class="login-popup">
+                                <h3 class="text-lg font-bold mb-4 text-center">Iniciar Sesión</h3>
+                                <form class="login-form">
+                                    <input type="email" placeholder="Correo electrónico" required>
+                                    <input type="password" placeholder="Contraseña" required>
+                                    <button type="submit">Ingresar</button>
+                                </form>
+                                <div class="login-options">
+                                    <a href="#" class="block mb-2">¿Olvidaste tu contraseña?</a>
+                                    <a href="#" class="block">Crear una cuenta</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Botón móvil -->
+                <div class="nav-mobile-button flex items-center space-x-4">
+                    <button id="search-button" class="text-dark hover:text-primary md:hidden">
+                        <i class="material-icons">search</i>
+                    </button>
+                    <button id="mobile-menu-button" class="text-dark hover:text-primary">
+                        <i class="material-icons text-3xl">menu</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú móvil -->
+        <div id="mobile-menu" class="md:hidden hidden bg-light-gray pb-3 px-4">
+
+            <div id="mobile-categories-popup" class="hidden mt-3 bg-white p-4 rounded-lg shadow-md">
+                <h3 class="text-lg font-bold mb-3 text-center text-primary">Categorías</h3>
+                <div class="grid grid-cols-2 gap-2">
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Niños</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Parejas</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Viajeros</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Recuerdos</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Nacionales</span>
+                    </a>
+                    <a href="productos.html"
+                        class="category-item flex items-center justify-center p-2 rounded hover:bg-gray-100">
+                        <span>Grupal</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="search-bar my-3">
+                <i class="material-icons search-icon">search</i>
+                <input type="text" placeholder="Buscar productos...">
+            </div>
+
+            <a href="index.html" class="block py-2 text-dark hover:text-primary flex items-center">
+                <i class="material-icons mr-2">home</i>
+                Inicio
+            </a>
+            <a href="productos.html" class="block py-2 text-dark hover:text-primary flex items-center">
+                <i class="material-icons mr-2">shopping_bag</i>
+                Productos
+            </a>
+            <button id="mobile-categories-button"
+                class="block py-2 text-dark hover:text-primary flex items-center w-full">
+                <i class="material-icons mr-2">category</i>
+                Categorías
+            </button>
+            <a href="about.html" class="block py-2 text-dark hover:text-primary flex items-center">
+                <i class="material-icons mr-2">info</i>
+                Nosotros
+            </a>
+            <a href="contact.html" class="block py-2 text-dark hover:text-primary flex items-center">
+                <i class="material-icons mr-2">email</i>
+                Contacto
+            </a>
+            <div class="flex space-x-4 pt-2">
+                <a href="carrito.html" class="text-dark hover:text-primary flex items-center">
+                    <i class="material-icons mr-1">shopping_cart</i>
+                    <span>(2)</span>
+                </a>
+                <button id="mobile-user-button" class="text-dark hover:text-primary flex items-center">
+                    <i class="material-icons">account_circle</i>
+                </button>
+            </div>
+            <!-- Popup de login para móvil -->
+            <div id="mobile-login-popup" class="hidden mt-3 bg-white p-4 rounded-lg shadow-md">
+                <h3 class="text-lg font-bold mb-4 text-center">Iniciar Sesión</h3>
+                <form class="login-form">
+                    <input type="email" placeholder="Correo electrónico" required>
+                    <input type="password" placeholder="Contraseña" required>
+                    <button type="submit">Ingresar</button>
+                </form>
+                <div class="login-options">
+                    <a href="#" class="block mb-2">¿Olvidaste tu contraseña?</a>
+                    <a href="#" class="block">Crear una cuenta</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative bg-dark text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Contáctanos</h1>
+            <p class="text-xl max-w-3xl mx-auto">Estamos aquí para ayudarte y responder tus preguntas</p>
+        </div>
+    </section>
+
+    <!-- Información de Contacto -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <!-- Contacto General -->
+                <div class="contact-card bg-light p-8 rounded-lg shadow-md">
+                    <div class="contact-icon mx-auto">
+                        <i class="material-icons">email</i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4 text-center">Contacto General</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="material-icons mr-2 text-primary">email</i>
+                            <span>info@astrosouvenirs.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="material-icons mr-2 text-primary">phone</i>
+                            <span>+51 987 654 321</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="material-icons mr-2 text-primary">location_on</i>
+                            <span>Av. Cultura 123, Lima, Perú</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="material-icons mr-2 text-primary">schedule</i>
+                            <span>Lunes a Viernes: 9am - 6pm<br>Sábados: 9am - 1pm</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Proveedores -->
+                <div class="contact-card bg-light p-8 rounded-lg shadow-md">
+                    <div class="contact-icon mx-auto">
+                        <i class="material-icons">business</i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4 text-center">Para Proveedores</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="material-icons mr-2 text-primary">email</i>
+                            <span>proveedores@astrosouvenirs.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="material-icons mr-2 text-primary">phone</i>
+                            <span>+51 987 654 322</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="material-icons mr-2 text-primary">description</i>
+                            <span>Requisitos: Certificado de calidad y muestras físicas</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="material-icons mr-2 text-primary">people</i>
+                            <span>Contacto: Juan Pérez - Gerente de Compras</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Redes Sociales -->
+                <div class="contact-card bg-light p-8 rounded-lg shadow-md">
+                    <div class="contact-icon mx-auto">
+                        <i class="material-icons">share</i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-4 text-center">Redes Sociales</h3>
+                    <div class="flex justify-center space-x-4 mb-4">
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-opacity-90 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-opacity-90 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="w-10 h-10 rounded-full bg-primary text-white flex items-center justify-center hover:bg-opacity-90 transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <p class="text-center mb-4">Síguenos para novedades y promociones</p>
+                    <div class="text-center">
+                        <a href="https://wa.me/51999999" target="_blank"
+                            class="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full text-sm font-medium transition">
+                            <i class="fab fa-whatsapp mr-2"></i> Chatear por WhatsApp
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Formulario de Contacto -->
+            <div class="max-w-3xl mx-auto bg-light p-8 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold mb-6 text-center">Envíanos un mensaje</h2>
+                <form class="space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="nombre" class="block mb-1 font-medium">Nombre</label>
+                            <input type="text" id="nombre" class="form-input w-full px-4 py-2 rounded">
+                        </div>
+                        <div>
+                            <label for="email" class="block mb-1 font-medium">Email</label>
+                            <input type="email" id="email" class="form-input w-full px-4 py-2 rounded">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="asunto" class="block mb-1 font-medium">Asunto</label>
+                        <input type="text" id="asunto" class="form-input w-full px-4 py-2 rounded">
+                    </div>
+                    <div>
+                        <label for="mensaje" class="block mb-1 font-medium">Mensaje</label>
+                        <textarea id="mensaje" rows="4" class="form-input w-full px-4 py-2 rounded"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit"
+                            class="bg-primary hover:bg-opacity-90 text-white px-6 py-2 rounded transition font-medium">
+                            Enviar Mensaje
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mapa -->
+    <section class="py-16 bg-light-gray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-bold mb-6 text-center">Nuestra Ubicación</h2>
+            <div class="rounded-lg overflow-hidden shadow-lg">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3901.965947369507!2d-77.042609924033!3d-12.046865088156797!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAyJzQ4LjciUyA3N8KwMDInMzMuOSJX!5e0!3m2!1ses!2spe!4v1620000000000!5m2!1ses!2spe"
+                    width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                    class="w-full h-96"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white pt-12 pb-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Logo y descripción -->
+                <div>
+                    <h3 class="text-primary text-2xl font-bold mb-4 font-heading">ASTROSouvenirs</h3>
+                    <p class="text-gray-300 text-sm">Souvenirs personalizados con identidad cultural peruana y un
+                        enfoque digital moderno.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="https://www.facebook.com/" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://web.whatsapp.com/" class="text-gray-300 hover:text-white transition">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Enlaces rápidos -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 font-heading">Enlaces Rápidos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-300 hover:text-white transition text-sm">Inicio</a>
+                        </li>
+                        <li><a href="productos.html"
+                                class="text-gray-300 hover:text-white transition text-sm">Productos</a></li>
+                        <li><a href="productos.html"
+                                class="text-gray-300 hover:text-white transition text-sm">Categorías</a></li>
+                        <li><a href="about.html" class="text-gray-300 hover:text-white transition text-sm">Nosotros</a>
+                        </li>
+                        <li><a href="contact.html"
+                                class="text-gray-300 hover:text-white transition text-sm">Contacto</a></li>
+                        <li><a href="terminosyconiciones.html"
+                                class="text-gray-300 hover:text-white transition text-sm">T&C</a></li>
+                    </ul>
+                </div>
+
+                <!-- Información de contacto -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 font-heading">Contacto</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="material-icons mr-2 text-primary text-sm">location_on</i>
+                            <span class="text-gray-300 text-sm">Av. Cultura 123, Lima, Perú</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="material-icons mr-2 text-primary text-sm">phone</i>
+                            <span class="text-gray-300 text-sm">+51 987 654 321</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="material-icons mr-2 text-primary text-sm">email</i>
+                            <span class="text-gray-300 text-sm">info@astrosouvenirs.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Boletín informativo -->
+                <div>
+                    <h4 class="font-bold text-lg mb-4 font-heading">Newsletter</h4>
+                    <p class="text-gray-300 text-sm mb-4">Suscríbete para recibir ofertas y novedades.</p>
+                    <form class="flex">
+                        <input type="email" placeholder="Tu correo"
+                            class="px-4 py-2 rounded-l focus:outline-none text-dark text-sm w-full">
+                        <button class="bg-primary hover:bg-opacity-90 px-4 py-2 rounded-r transition">
+                            <i class="material-icons text-white text-sm">send</i>
+                        </button>
+                    </form>
+                    <p class="text-gray-400 text-xs mt-2">Prometemos no enviar spam.</p>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-700 mt-8 pt-6 text-center text-gray-400 text-sm">
+                <p>&copy; 2023 ASTROSouvenirs. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+
+        const categoriesButton = document.getElementById('categories-button');
+        const categoriesPopup = document.getElementById('categories-popup');
+        const mobileCategoriesButton = document.getElementById('mobile-categories-button');
+        const mobileCategoriesPopup = document.getElementById('mobile-categories-popup');
+
+        // Para desktop
+        categoriesButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            categoriesPopup.classList.toggle('hidden');
+
+            // Cerrar otros popups si están abiertos
+            document.getElementById('login-popup').classList.add('hidden');
+        });
+
+        // Para móvil
+        mobileCategoriesButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            mobileCategoriesPopup.classList.toggle('hidden');
+
+            // Cerrar otros popups si están abiertos
+            document.getElementById('mobile-login-popup').classList.add('hidden');
+        });
+
+        // Cerrar popups al hacer clic fuera de ellos
+        document.addEventListener('click', function (e) {
+            if (!categoriesButton.contains(e.target) && !categoriesPopup.contains(e.target)) {
+                categoriesPopup.classList.add('hidden');
+            }
+
+            if (!mobileCategoriesButton.contains(e.target) && !mobileCategoriesPopup.contains(e.target)) {
+                mobileCategoriesPopup.classList.add('hidden');
+            }
+        });
+        // Control de menú móvil mejorado
+        let resizeTimer;
+        window.addEventListener('resize', function () {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function () {
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (window.innerWidth >= 1280) {
+                    mobileMenu.classList.add('hidden');
+                }
+
+                // Ajustar dinámicamente el navbar
+                adjustNavbarLayout();
+            }, 250);
+        });
+
+        function adjustNavbarLayout() {
+            const navbar = document.querySelector('nav');
+            const viewportWidth = window.innerWidth;
+
+            // Ajustes específicos para el rango problemático
+            if (viewportWidth > 1024 && viewportWidth < 1280) {
+                // Reducir espacio entre items
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.style.fontSize = '0.875rem';
+                    link.style.padding = '0.5rem 0.25rem';
+                });
+
+                // Ajustar barra de búsqueda
+                const searchContainer = document.querySelector('.search-container');
+                if (searchContainer) {
+                    searchContainer.style.maxWidth = '300px';
+                    searchContainer.style.margin = '0 1rem';
+                }
+            }
+        }
+
+        // Inicializar y ajustar al cargar
+        document.addEventListener('DOMContentLoaded', function () {
+            adjustNavbarLayout();
+
+            // Control del menú móvil
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuButton.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+                document.body.style.overflow = mobileMenu.classList.contains('hidden') ? '' : 'hidden';
+            });
+
+            // Control del botón de búsqueda en móvil
+            const searchButton = document.getElementById('search-button');
+            if (searchButton) {
+                searchButton.addEventListener('click', function () {
+                    document.querySelector('.mobile-search-bar').classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
